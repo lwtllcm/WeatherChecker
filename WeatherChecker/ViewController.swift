@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import MapKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var mapView: MKMapView!
+    
+    @IBOutlet weak var mapTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,5 +24,11 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func weatherInfoButtonPressed(sender: AnyObject) {
+        print("WeatherInfo button pressed")
+        print(mapTextField.text)
+
+        
+    }
 }
 
