@@ -13,6 +13,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    let stack = CoreDataStack(modelName: "Model")!
+
+    var sharedSession = NSURLSession.sharedSession()
+    
+    func preloadData() {
+        do {
+            try stack.dropAllData()
+        }catch{
+            print("Error dropping all objects in DB")
+        }
+        
+        
+        //let pinLosAngeles = Pin(entity: "Los Angeles", insertIntoManagedObjectContext: stack.context)
+        
+        //let pinLosAngeles = Pin(location: "Los Angeles", latitude: "33.955190025712511", longitude: "-118.07473099889084", context: stack.context)
+        
+        // pinLosAngeles.location = "LosAngeles"
+        // pinLosAngeles.latitude = "33.955190025712511"
+        // pinLosAngeles.longitude = "-118.07473099889084"
+        
+        //print("pinLosAngeles", pinLosAngeles)
+        
+    }
+
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

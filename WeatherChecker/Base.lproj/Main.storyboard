@@ -28,7 +28,7 @@
                                 <state key="normal" title="Weather Info"/>
                                 <connections>
                                     <action selector="weatherInfoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WNP-fO-DdW"/>
-                                    <segue destination="YiM-nr-D3P" kind="showDetail" id="tKh-Kz-X1s"/>
+                                    <segue destination="YiM-nr-D3P" kind="showDetail" identifier="showWeatherInfo" id="tKh-Kz-X1s"/>
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="apI-Cx-UBI">
