@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mev-V1-DNX">
-                                <rect key="frame" x="21" y="20" width="559" height="30"/>
+                                <rect key="frame" x="7" y="20" width="534" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -34,18 +34,28 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="apI-Cx-UBI">
                                 <rect key="frame" x="0.0" y="58" width="600" height="460"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BHe-Xi-bDB">
+                                <rect key="frame" x="560" y="20" width="30" height="30"/>
+                                <state key="normal" title="Pin"/>
+                                <connections>
+                                    <action selector="addPinButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Keh-vG-f2a"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nJf-vj-8Bh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="13F-q1-f1e"/>
-                            <constraint firstItem="Mev-V1-DNX" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="68c-pg-GyD"/>
-                            <constraint firstItem="Mev-V1-DNX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="1" id="A8l-3z-m4I"/>
+                            <constraint firstItem="BHe-Xi-bDB" firstAttribute="leading" secondItem="Mev-V1-DNX" secondAttribute="trailing" constant="19" id="32Y-2E-hIY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BHe-Xi-bDB" secondAttribute="trailing" constant="-10" id="OZ8-un-ORm"/>
                             <constraint firstItem="nJf-vj-8Bh" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Xjv-ED-svP"/>
+                            <constraint firstItem="Mev-V1-DNX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-13" id="qEd-w2-G68"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addPinButton" destination="BHe-Xi-bDB" id="m1k-zo-V1F"/>
                         <outlet property="mapTextField" destination="Mev-V1-DNX" id="SHE-ey-k75"/>
                         <outlet property="mapView" destination="apI-Cx-UBI" id="OcI-eP-WXD"/>
+                        <outlet property="weatherInfoButton" destination="nJf-vj-8Bh" id="VPC-OR-v6A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
