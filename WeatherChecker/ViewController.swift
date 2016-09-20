@@ -130,13 +130,12 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
                 
                 
                 let coordinateRegion = MKCoordinateRegionMakeWithDistance(thisCoordinate, regionRadius * 2.0, regionRadius * 2.0)
-                self.mapView.setRegion(coordinateRegion, animated: true)
-                self.mapView.centerCoordinate = thisCoordinate
+                //self.mapView.setRegion(coordinateRegion, animated: true)
+                //self.mapView.centerCoordinate = thisCoordinate
                 
                 
                 self.mapView.delegate = self
                 
-                print("ViewController viewDidLoad")
                 
                 let fr = NSFetchRequest(entityName: "Pin")
                 fr.sortDescriptors = [NSSortDescriptor(key: "location", ascending:  true)]
@@ -147,6 +146,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
                 self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
                 
                 self.addPin(self.mapTextField.text!, latitude: "\(self.latitude)", longitude: "\(self.longitude)")
+                
  /*
                 if self.fetchedResultsController?.fetchedObjects?.count == 0 {
                     print("no fetched results")
@@ -213,7 +213,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
             let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let stack = delegate.stack
             
-            try stack.saveContext()
+            try stack.save()
         }catch{
             print("error while saving")
         }

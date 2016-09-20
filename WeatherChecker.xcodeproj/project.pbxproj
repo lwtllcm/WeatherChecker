@@ -33,8 +33,8 @@
 		5B6ECDC51D8E4CDC003C8218 /* DBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBClient.swift; sourceTree = "<group>"; };
 		5B6ECDC71D8E4D3E003C8218 /* OpenWeatherMapConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenWeatherMapConstants.swift; sourceTree = "<group>"; };
 		5B6ECDCA1D8F35DA003C8218 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		5B6ECDCC1D8F366A003C8218 /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		5B6ECDCD1D8F366A003C8218 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
+		5B6ECDCC1D8F366A003C8218 /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pin+CoreDataProperties.swift"; path = "../Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5B6ECDCD1D8F366A003C8218 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pin.swift; path = ../Pin.swift; sourceTree = "<group>"; };
 		5B6ECDD01D8F37DA003C8218 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -52,8 +52,6 @@
 		5B6ECDA51D8E31D9003C8218 = {
 			isa = PBXGroup;
 			children = (
-				5B6ECDCC1D8F366A003C8218 /* Pin+CoreDataProperties.swift */,
-				5B6ECDCD1D8F366A003C8218 /* Pin.swift */,
 				5B6ECDB01D8E31D9003C8218 /* WeatherChecker */,
 				5B6ECDAF1D8E31D9003C8218 /* Products */,
 			);
@@ -80,6 +78,8 @@
 				5B6ECDC51D8E4CDC003C8218 /* DBClient.swift */,
 				5B6ECDC71D8E4D3E003C8218 /* OpenWeatherMapConstants.swift */,
 				5B6ECDC91D8F35DA003C8218 /* Model.xcdatamodeld */,
+				5B6ECDCC1D8F366A003C8218 /* Pin+CoreDataProperties.swift */,
+				5B6ECDCD1D8F366A003C8218 /* Pin.swift */,
 				5B6ECDD01D8F37DA003C8218 /* CoreDataStack.swift */,
 			);
 			path = WeatherChecker;
