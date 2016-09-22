@@ -53,17 +53,49 @@ class  WeatherInfoTableViewController: UITableViewController
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let pinCell = tableView.dequeueReusableCellWithIdentifier("PinCell") as UITableViewCell!
+       
         
-        let fetchedObjects = weatherInfoFetchedResultsController?.fetchedObjects
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
+        let fetchedObjects = self.weatherInfoFetchedResultsController?.fetchedObjects
         let thisPin = fetchedObjects![indexPath.row] as! Pin
         print("thisPin",thisPin.location)
         
         pinCell.textLabel?.text = thisPin.location
         
-        //pinCell.textLabel?.text = thisPin.location as String!
-        //
-        //pinCell.textLabel!.text = "Los Angeles"
-       
+        
+        DBClient.sharedInstance().getWeatherData (thisPin.latitude!, lon: thisPin.longitude!) {(results, error) in
+            print("taskForGetMethod")
+            print("results from taskForGETMethod", results)
+            print("error from taskForGETMethod", error)
+            
+            if (error != nil) {
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    
+                    let errorMsg  = error?.localizedDescription
+                    
+                    let uiAlertController = UIAlertController(title: "download error", message: errorMsg, preferredStyle: .Alert)
+                    let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    uiAlertController.addAction(defaultAction)
+                    self.presentViewController(uiAlertController, animated: true, completion: nil)
+                }
+            }
+            //}
+            else {
+                
+                let thisWeatherDescription = results.valueForKey("weather")?.valueForKey("description") as! NSArray
+                print(thisWeatherDescription[0])
+                
+                dispatch_async(dispatch_get_main_queue()) {
+
+                pinCell.textLabel?.text = thisPin.location
+                pinCell.detailTextLabel?.text = (thisWeatherDescription[0] as! String)
+                }
+                
+            }
+            }
+        })
+        //}
+        
         return pinCell
     }
     

@@ -1,4 +1,4 @@
-//
+////
 //  DBClient.swift
 //  WeatherChecker
 //
@@ -23,7 +23,7 @@ class DBClient {
     }
     
     
-    func getWeatherData(completionHandlerForGet: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func getWeatherData(lat:String, lon: String, completionHandlerForGet: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         print("DBClient getWeatherData")
         let components = NSURLComponents()
@@ -31,16 +31,21 @@ class DBClient {
         components.host = "api.openweathermap.org"
         components.path = "/data/2.5/weather"
         components.queryItems = [NSURLQueryItem]()
-        let queryItem1 = NSURLQueryItem(name:"lat", value:"35")
-        let queryItem2 = NSURLQueryItem(name:"lon", value:"139")
+        //let queryItem1 = NSURLQueryItem(name:"lat", value:"35")
+        //let queryItem2 = NSURLQueryItem(name:"lon", value:"139")
+        
+        let queryItem1 = NSURLQueryItem(name:"lat", value:lat)
+        let queryItem2 = NSURLQueryItem(name:"lon", value:lon)
         let queryItem3 = NSURLQueryItem(name:"appid", value:"5c1ed52c4b27b30dfa7a5ced97c4e8d8")
         let queryItem4 = NSURLQueryItem(name: "units", value:"imperial")
+
         components.queryItems?.append(queryItem1)
         components.queryItems?.append(queryItem2)
         components.queryItems?.append(queryItem3)
         components.queryItems?.append(queryItem4)
         
         let request = NSMutableURLRequest(URL: components.URL!)
+        
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.HTTPMethod = "GET"
         print(request)
