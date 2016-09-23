@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Tqk-AS-kix">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -18,49 +18,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mev-V1-DNX">
-                                <rect key="frame" x="7" y="20" width="534" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJf-vj-8Bh">
                                 <rect key="frame" x="20" y="535" width="560" height="30"/>
                                 <state key="normal" title="Weather Info"/>
                                 <connections>
                                     <action selector="weatherInfoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WNP-fO-DdW"/>
-                                    <segue destination="YiM-nr-D3P" kind="showDetail" identifier="showWeatherInfo" id="tKh-Kz-X1s"/>
+                                    <segue destination="YiM-nr-D3P" kind="show" identifier="showWeatherInfo" id="tKh-Kz-X1s"/>
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="apI-Cx-UBI">
                                 <rect key="frame" x="0.0" y="58" width="600" height="460"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BHe-Xi-bDB">
-                                <rect key="frame" x="560" y="20" width="30" height="30"/>
-                                <state key="normal" title="Pin"/>
-                                <connections>
-                                    <action selector="addPinButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Keh-vG-f2a"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nJf-vj-8Bh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="13F-q1-f1e"/>
-                            <constraint firstItem="BHe-Xi-bDB" firstAttribute="leading" secondItem="Mev-V1-DNX" secondAttribute="trailing" constant="19" id="32Y-2E-hIY"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="BHe-Xi-bDB" secondAttribute="trailing" constant="-10" id="OZ8-un-ORm"/>
                             <constraint firstItem="nJf-vj-8Bh" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Xjv-ED-svP"/>
-                            <constraint firstItem="Mev-V1-DNX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-13" id="qEd-w2-G68"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="04U-pI-TB8">
+                        <nil key="title"/>
+                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="u2j-9M-plF">
+                            <rect key="frame" x="93" y="7" width="414" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <barButtonItem key="rightBarButtonItem" title="Pin" id="0bO-pO-cts">
+                            <connections>
+                                <action selector="addPinButtonPressed:" destination="BYZ-38-t0r" id="Md6-rS-TpU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="addPinButton" destination="BHe-Xi-bDB" id="m1k-zo-V1F"/>
-                        <outlet property="mapTextField" destination="Mev-V1-DNX" id="SHE-ey-k75"/>
+                        <outlet property="addPinButton" destination="0bO-pO-cts" id="oqC-10-OlF"/>
+                        <outlet property="mapTextField" destination="u2j-9M-plF" id="boU-1n-xCe"/>
                         <outlet property="mapView" destination="apI-Cx-UBI" id="OcI-eP-WXD"/>
                         <outlet property="weatherInfoButton" destination="nJf-vj-8Bh" id="VPC-OR-v6A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="305" y="290"/>
+            <point key="canvasLocation" x="1117" y="290"/>
         </scene>
         <!--Weather Info Table View Controller-->
         <scene sceneID="UBT-ic-DQt">
@@ -72,7 +71,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PinCell" textLabel="dee-1s-Inb" detailTextLabel="JX0-0K-i9A" style="IBUITableViewCellStyleValue1" id="ueV-1k-NTo">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ueV-1k-NTo" id="wB3-bU-TWe">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -82,7 +81,7 @@
                                             <rect key="frame" x="15" y="12" width="32" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JX0-0K-i9A">
@@ -104,7 +103,25 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42K-xq-Pgo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1080" y="290"/>
+            <point key="canvasLocation" x="1892" y="290"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="S35-wy-7Fc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tqk-AS-kix" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HIA-4s-CpO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="AWg-du-jjG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Ta-K8-7Pw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="305" y="290"/>
         </scene>
     </scenes>
 </document>

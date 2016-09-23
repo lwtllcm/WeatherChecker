@@ -14,8 +14,9 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var weatherInfoButton: UIButton!
+    
     @IBOutlet weak var mapTextField: UITextField!
-    @IBOutlet weak var addPinButton: UIButton!
+    @IBOutlet weak var addPinButton: UIBarButtonItem!
     
     var latitude: CLLocationDegrees = 0.0
     var longitude: CLLocationDegrees = 0.0
@@ -81,8 +82,8 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     @IBAction func addPinButtonPressed(sender: AnyObject) {
+ 
         print("addPin button pressed")
         print(mapTextField.text)
         
