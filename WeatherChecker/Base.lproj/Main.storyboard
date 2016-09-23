@@ -93,6 +93,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="sc8-iQ-Ih8" kind="show" identifier="showWeatherDetail" action="showDetailViewController:sender:" id="ouT-PR-BpM"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -104,6 +107,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42K-xq-Pgo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1892" y="290"/>
+        </scene>
+        <!--Weather Detail View Controller-->
+        <scene sceneID="B1e-98-oi8">
+            <objects>
+                <viewController id="sc8-iQ-Ih8" customClass="WeatherDetailViewController" customModule="WeatherChecker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eyS-Ey-MjY"/>
+                        <viewControllerLayoutGuide type="bottom" id="9co-8f-URH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IVB-xp-j5e">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MQT-Fj-yf0">
+                                <rect key="frame" x="116" y="13" width="422" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="MQT-Fj-yf0" secondAttribute="trailing" constant="42" id="rPu-5O-rVh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="detailViewTitle" destination="MQT-Fj-yf0" id="x9C-g9-Agy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rid-lU-mgZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2641" y="295"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="S35-wy-7Fc">

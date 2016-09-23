@@ -99,4 +99,28 @@ class  WeatherInfoTableViewController: UITableViewController
         return pinCell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("didSelectRowAtIndexPath")
+         
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("prepareForSegue")
+        
+        if segue.identifier == "showWeatherDetail" {
+            if let weatherDetailViewController = segue.destinationViewController as? WeatherDetailViewController {
+                
+                
+                weatherDetailViewController.weatherLocation = "test location"
+                
+                
+                
+            }
+            
+        }
+        
+    }
+
+    
 }
