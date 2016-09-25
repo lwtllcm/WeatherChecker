@@ -14,6 +14,9 @@ class  WeatherInfoTableViewController: UITableViewController
     
     var weatherInfoFetchedResultsController:NSFetchedResultsController?
     
+    var weatherDetailsArray:NSMutableArray = []
+    var weatherDetailsDictionary:NSMutableDictionary = [:]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("WeatherInfoTableViewController viewDidLoad")
@@ -85,10 +88,26 @@ class  WeatherInfoTableViewController: UITableViewController
                 let thisWeatherDescription = results.valueForKey("weather")?.valueForKey("description") as! NSArray
                 print(thisWeatherDescription[0])
                 
+                let weatherDetailsDictionary = NSMutableDictionary()
+                weatherDetailsDictionary.setObject(results.valueForKey("name")!, forKey: "name")
+                weatherDetailsDictionary.setObject((results.valueForKey("main")?.valueForKey("humidity"))!, forKey: "humidity")
+                weatherDetailsDictionary.setObject((results.valueForKey("main")?.valueForKey("pressure"))!, forKey: "pressure")
+                weatherDetailsDictionary.setObject((results.valueForKey("main")?.valueForKey("temp"))!, forKey: "temp")
+                weatherDetailsDictionary.setObject((results.valueForKey("sys")?.valueForKey("sunrise"))!, forKey: "sunrise")
+                weatherDetailsDictionary.setObject((results.valueForKey("sys")?.valueForKey("sunset"))!, forKey: "sunset")
+
+
+                print(weatherDetailsDictionary)
+                
+                self.weatherDetailsArray.addObject(weatherDetailsDictionary)
+                print(self.weatherDetailsArray)
+                
+                
                 dispatch_async(dispatch_get_main_queue()) {
 
                 pinCell.textLabel?.text = thisPin.location
                 pinCell.detailTextLabel?.text = (thisWeatherDescription[0] as! String)
+                    
                 }
                 
             }
@@ -101,8 +120,18 @@ class  WeatherInfoTableViewController: UITableViewController
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("didSelectRowAtIndexPath")
-         
+        print(weatherDetailsArray)
+        print(weatherDetailsArray[indexPath.row])
         
+        weatherDetailsDictionary = weatherDetailsArray[indexPath.row] as! NSMutableDictionary
+        print(weatherDetailsDictionary)
+        
+        
+        let weatherDetailViewController = WeatherDetailViewController()
+        weatherDetailViewController.weatherDetailsDictionary = self.weatherDetailsDictionary
+        
+        
+
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -110,11 +139,12 @@ class  WeatherInfoTableViewController: UITableViewController
         
         if segue.identifier == "showWeatherDetail" {
             if let weatherDetailViewController = segue.destinationViewController as? WeatherDetailViewController {
-                
+                let indexPath = tableView.indexPathForSelectedRow
                 
                 weatherDetailViewController.weatherLocation = "test location"
+                weatherDetailViewController.weatherDetailsDictionary = weatherDetailsArray[indexPath!.row] as! NSMutableDictionary
                 
-                
+                //weatherDetailViewController.weatherDetailsDictionary = self.weatherDetailsDictionary
                 
             }
             
