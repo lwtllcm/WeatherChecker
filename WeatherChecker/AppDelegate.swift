@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
         print(paths[0])
         
-        stack.autoSave(60)
+        stack.autoSave(20)
 
         
         return true

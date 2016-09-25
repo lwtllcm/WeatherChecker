@@ -13,7 +13,7 @@ class  WeatherDetailViewController: UIViewController {
     var weatherLocation:String = ""
     var weatherDetailsDictionary:NSMutableDictionary = [:]
     
-    @IBOutlet weak var detailViewTitle: UITextField!
+   // @IBOutlet weak var detailViewTitle: UITextField!
     
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
@@ -31,29 +31,34 @@ class  WeatherDetailViewController: UIViewController {
         //detailViewTitle.text = weatherLocation
         
         print(weatherDetailsDictionary)
-        detailViewTitle.text = weatherDetailsDictionary.valueForKey("name") as? String
-        let convertTemp = String(weatherDetailsDictionary.valueForKey("temp"))
+        
+      //  detailViewTitle.text = weatherDetailsDictionary.valueForKey("name") as? String
+        
+        if let convertTemp = weatherDetailsDictionary.valueForKey("temp") {
         print(convertTemp)
         tempLabel.text =  String(convertTemp)
+        }
         
-        let convertHumidity = String(weatherDetailsDictionary.valueForKey("humidity"))
+        if let convertHumidity =  weatherDetailsDictionary.valueForKey("humidity") {
         print(convertHumidity)
         humidityLabel.text =  String(convertHumidity)
-
+        }
         
-        let convertPressure = String(weatherDetailsDictionary.valueForKey("pressure"))
+        if let convertPressure = weatherDetailsDictionary.valueForKey("pressure") {
         print(convertPressure)
         pressureLabel.text =  String(convertPressure)
-
+        }
         
-        let convertSunrise = String(weatherDetailsDictionary.valueForKey("sunrise"))
+        if let convertSunrise = weatherDetailsDictionary.valueForKey("sunrise") {
         print(convertSunrise)
         sunriseLabel.text =  String(convertSunrise)
+        }
 
         
-        let convertSunset = String(weatherDetailsDictionary.valueForKey("sunset"))
+        if let convertSunset = weatherDetailsDictionary.valueForKey("sunset") {
         print(convertSunset)
         sunsetLabel.text =  String(convertSunset)
+        }
 
         self.reloadInputViews()
 

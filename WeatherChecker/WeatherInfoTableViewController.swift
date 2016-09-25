@@ -126,14 +126,18 @@ class  WeatherInfoTableViewController: UITableViewController
         weatherDetailsDictionary = weatherDetailsArray[indexPath.row] as! NSMutableDictionary
         print(weatherDetailsDictionary)
         
+        let weatherDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("WeatherDetailViewController") as! WeatherDetailViewController
+        weatherDetailViewController.weatherDetailsDictionary = weatherDetailsArray[indexPath.row] as! NSMutableDictionary
+        navigationController?.pushViewController(weatherDetailViewController, animated: true)
         
-        let weatherDetailViewController = WeatherDetailViewController()
-        weatherDetailViewController.weatherDetailsDictionary = self.weatherDetailsDictionary
+        
+        //let weatherDetailViewController = WeatherDetailViewController()
+        //weatherDetailViewController.weatherDetailsDictionary = self.weatherDetailsDictionary
         
         
 
     }
-    
+   /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print("prepareForSegue")
         
@@ -141,7 +145,8 @@ class  WeatherInfoTableViewController: UITableViewController
             if let weatherDetailViewController = segue.destinationViewController as? WeatherDetailViewController {
                 let indexPath = tableView.indexPathForSelectedRow
                 
-                weatherDetailViewController.weatherLocation = "test location"
+                //weatherDetailViewController.weatherLocation = "test location"
+                
                 weatherDetailViewController.weatherDetailsDictionary = weatherDetailsArray[indexPath!.row] as! NSMutableDictionary
                 
                 //weatherDetailViewController.weatherDetailsDictionary = self.weatherDetailsDictionary
@@ -149,8 +154,8 @@ class  WeatherInfoTableViewController: UITableViewController
             }
             
         }
-        
+ 
     }
-
+*/
     
 }
