@@ -177,10 +177,17 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZh-wj-Kpc">
+                                <rect key="frame" x="131" y="71" width="157" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="detailViewTitle" destination="ZZh-wj-Kpc" id="E3j-D9-Gw4"/>
                         <outlet property="humidityLabel" destination="nIL-6i-9Zh" id="VKt-QW-Ph9"/>
                         <outlet property="pressureLabel" destination="fDq-Wv-mA6" id="s9H-iu-tcu"/>
                         <outlet property="sunriseLabel" destination="0S8-4A-pGl" id="BJB-RJ-g0e"/>

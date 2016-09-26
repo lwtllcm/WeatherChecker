@@ -13,7 +13,8 @@ class  WeatherDetailViewController: UIViewController {
     var weatherLocation:String = ""
     var weatherDetailsDictionary:NSMutableDictionary = [:]
     
-   // @IBOutlet weak var detailViewTitle: UITextField!
+   
+    @IBOutlet weak var detailViewTitle: UILabel!
     
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
@@ -28,11 +29,11 @@ class  WeatherDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("WeatherDetailViewController")
-        //detailViewTitle.text = weatherLocation
+        detailViewTitle.text = weatherLocation
         
         print(weatherDetailsDictionary)
         
-      //  detailViewTitle.text = weatherDetailsDictionary.valueForKey("name") as? String
+        detailViewTitle.text = weatherDetailsDictionary.valueForKey("name") as? String
         
         if let convertTemp = weatherDetailsDictionary.valueForKey("temp") {
         print(convertTemp)
