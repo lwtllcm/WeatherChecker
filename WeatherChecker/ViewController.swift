@@ -73,15 +73,13 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        //subscribeToKeyboardNotifications()
-        //subscribeToKeyboardWillHideNotifications()
         
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
+    
     @IBAction func addPinButtonPressed(sender: AnyObject) {
  
         print("addPin button pressed")
@@ -103,9 +101,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
                 let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 uiAlertController.addAction(defaultAction)
                 self.presentViewController(uiAlertController, animated: true, completion: nil)
-                //self.activityIndicator.alpha = 0.0
-                //self.activityIndicator.stopAnimating()
-                
                 
             }
             else {
@@ -131,9 +126,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
                 
                 
                 let coordinateRegion = MKCoordinateRegionMakeWithDistance(thisCoordinate, regionRadius * 2.0, regionRadius * 2.0)
-                //self.mapView.setRegion(coordinateRegion, animated: true)
-                //self.mapView.centerCoordinate = thisCoordinate
-                
                 
                 self.mapView.delegate = self
                 
@@ -148,27 +140,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
                 
                 self.addPin(self.mapTextField.text!, latitude: "\(self.latitude)", longitude: "\(self.longitude)")
                 
- /*
-                if self.fetchedResultsController?.fetchedObjects?.count == 0 {
-                    print("no fetched results")
-                    
-                }
-                else {
-                    for pin in (self.fetchedResultsController?.fetchedObjects)! {
-                        print(pin)
-                        self.setAnnotations(pin as! Pin)
-                        
-                       // self.addPin(self.mapTextField.text!, latitude: thisCoordinate.latitude  as! String, longitude: thisCoordinate.longitude as!  String)
-                        
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.mapView.addAnnotation(annotation)
-                        }
-                        
-                        self.mapView.reloadInputViews()
-                        
-                    }
-                }
-*/
 
             }
     
@@ -184,7 +155,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
     
     func setAnnotations (pin:Pin) {
         print("setAnnotations")
-        //var annotations = [MKPointAnnotation]()
         
         let lat1 = CLLocationDegrees(pin.latitude!)
         print(lat1)
@@ -209,7 +179,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
         print("addPin", pin)
         
         do {
-            // try stack.save()
             
             let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let stack = delegate.stack
@@ -234,17 +203,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
                 let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 let stack = delegate.stack
                 
-               // let pred1 = NSPredicate(format: "latitude = %@", selectedCoordinateLatitudeString)
-                
-                //let pred2 = NSPredicate(format: "longitude = %@", selectedCoordinateLongitudeString)
-                
-                //http://stackoverflow.com/questions/24855159/nspredicate-with-swift-and-core-data
-             //   let compoundPredicate = NSCompoundPredicate.init(andPredicateWithSubpredicates: ([pred1, pred2]))
-                
-              //  fr.predicate = compoundPredicate
-                
-             //   print(fr)
-                
              
              fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
                 
@@ -252,8 +210,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
              print("testFetchedResultsController.fetchedObjects in prepareForSegue", fetchedResultsController!.fetchedObjects)
                 
              weatherInfoTableViewController.weatherInfoFetchedResultsController = fetchedResultsController
-                
-                
+               
                 
             }
             

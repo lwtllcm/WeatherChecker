@@ -21,11 +21,6 @@ class  WeatherInfoTableViewController: UITableViewController
         super.viewDidLoad()
         print("WeatherInfoTableViewController viewDidLoad")
         
-        //let fetchedObjects = weatherInfoFetchedResultsController?.fetchedObjects
-        //print("fetchedObjects", fetchedObjects)
-        
-        //for pin in fetchedObjects! {
-         //   print(pin)
 
         }
         
@@ -113,7 +108,6 @@ class  WeatherInfoTableViewController: UITableViewController
             }
             }
         })
-        //}
         
         return pinCell
     }
@@ -130,32 +124,8 @@ class  WeatherInfoTableViewController: UITableViewController
         weatherDetailViewController.weatherDetailsDictionary = weatherDetailsArray[indexPath.row] as! NSMutableDictionary
         navigationController?.pushViewController(weatherDetailViewController, animated: true)
         
-        
-        //let weatherDetailViewController = WeatherDetailViewController()
-        //weatherDetailViewController.weatherDetailsDictionary = self.weatherDetailsDictionary
-        
-        
 
     }
-   /*
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("prepareForSegue")
-        
-        if segue.identifier == "showWeatherDetail" {
-            if let weatherDetailViewController = segue.destinationViewController as? WeatherDetailViewController {
-                let indexPath = tableView.indexPathForSelectedRow
-                
-                //weatherDetailViewController.weatherLocation = "test location"
-                
-                weatherDetailViewController.weatherDetailsDictionary = weatherDetailsArray[indexPath!.row] as! NSMutableDictionary
-                
-                //weatherDetailViewController.weatherDetailsDictionary = self.weatherDetailsDictionary
-                
-            }
-            
-        }
- 
-    }
-*/
+
     
 }
