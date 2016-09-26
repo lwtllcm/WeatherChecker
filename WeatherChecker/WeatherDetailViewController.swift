@@ -24,8 +24,7 @@ class  WeatherDetailViewController: UIViewController {
     @IBOutlet weak var sunriseLabel: UILabel!
     
     @IBOutlet weak var sunsetLabel: UILabel!
-    
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         print("WeatherDetailViewController")
