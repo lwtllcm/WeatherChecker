@@ -13,7 +13,6 @@ class  WeatherDetailViewController: UIViewController {
     var weatherLocation:String = ""
     var weatherDetailsDictionary:NSMutableDictionary = [:]
     
-   
     @IBOutlet weak var detailViewTitle: UILabel!
     
     @IBOutlet weak var tempLabel: UILabel!
@@ -24,7 +23,7 @@ class  WeatherDetailViewController: UIViewController {
     @IBOutlet weak var sunriseLabel: UILabel!
     
     @IBOutlet weak var sunsetLabel: UILabel!
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("WeatherDetailViewController")
