@@ -10,13 +10,16 @@ import UIKit
 import MapKit
 import CoreData
 
-class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var weatherInfoButton: UIButton!
     
     @IBOutlet weak var mapTextField: UITextField!
     @IBOutlet weak var addPinButton: UIBarButtonItem!
+    
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var latitude: CLLocationDegrees = 0.0
     var longitude: CLLocationDegrees = 0.0
@@ -44,6 +47,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        self.activityIndicator.hidden = true
         
         let fr = NSFetchRequest(entityName: "Pin")
         fr.sortDescriptors = [NSSortDescriptor(key: "location", ascending:  true)]
@@ -87,6 +91,10 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
         
         let geocoder = CLGeocoder()
         
+        self.activityIndicator.hidden = false
+
+        self.activityIndicator.startAnimating()
+        
         
         geocoder.geocodeAddressString(mapTextField.text!, completionHandler: {placemarks, error in
             
@@ -104,7 +112,10 @@ class ViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate {
                 
             }
             else {
-                
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidden = true
+
+
                 let thisPlacemark = placemarks![0]
                 print(thisPlacemark)
                 print(thisPlacemark.location)
