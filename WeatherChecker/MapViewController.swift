@@ -18,6 +18,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
     @IBOutlet weak var mapTextField: UITextField!
     @IBOutlet weak var addPinButton: UIBarButtonItem!
     
+    let textFieldDelegate = TextFieldDelegate()
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -48,6 +49,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         super.viewDidLoad()
         mapView.delegate = self
         self.activityIndicator.hidden = true
+
         
         let fr = NSFetchRequest(entityName: "Pin")
         fr.sortDescriptors = [NSSortDescriptor(key: "location", ascending:  true)]
@@ -77,9 +79,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        mapTextField.text = " "
+
+        setTextFields(mapTextField)
+        
+        subscribeToKeyboardNotifications()
+        subscribeToKeyboardWillHideNotifications()
+
         
     }
+
+    override func viewWillDisappear(animated: Bool) {
+        print("viewWillDisappear")
+        super.viewWillDisappear(animated)
+        unsubscribeFromKeyboardNotifications()
+    }
     
+    func setTextFields(textField:UITextField) {
+        print("setTextFields")
+        
+        textField.textAlignment = NSTextAlignment.Center
+        textField.adjustsFontSizeToFitWidth = true
+        textField.delegate = textFieldDelegate
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -228,5 +251,62 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         }
         
     }
+    
+    //keyboard methods
+    
+    func keyboardWillShow(notification: NSNotification) {
+        print("keyboardWillShow")
+       // if bottomText.isFirstResponder() {
+           // view.frame.origin.y = getKeyboardHeight(notification) * -1
+       // }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        print("keyboardWillHide")
+       // if bottomText.isFirstResponder() {
+            view.frame.origin.y = 0.0
+       // }
+    }
+    
+    func getKeyboardHeight(notification:NSNotification) -> CGFloat {
+        print("getKeyboardHeight")
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.CGRectValue().height
+    }
+    
+    func subscribeToKeyboardNotifications() {
+        print("subscribeToKeyboardNotifications")
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+    }
+    
+    func subscribeToKeyboardWillHideNotifications() {
+        print("subscribeToKeyboardNotifications")
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        print("unsubscribeFromKeyboardNotifications")
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardWillHideNotifications() {
+        print("unsubscribeFromKeyboardNotifications")
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+  /*
+    //text methods
+    func textFieldDidBeginEditing( textField: UITextField) {
+        print("textFieldDidBeginEditing")
+        textField.text = ""
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        print("textFieldShouldReturn")
+        return true
+   }
+ */
+
 }
 

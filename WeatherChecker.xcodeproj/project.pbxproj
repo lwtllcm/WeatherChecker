@@ -20,6 +20,7 @@
 		5B6ECDCE1D8F366A003C8218 /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6ECDCC1D8F366A003C8218 /* Pin+CoreDataProperties.swift */; };
 		5B6ECDCF1D8F366A003C8218 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6ECDCD1D8F366A003C8218 /* Pin.swift */; };
 		5B6ECDD11D8F37DA003C8218 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6ECDD01D8F37DA003C8218 /* CoreDataStack.swift */; };
+		5BEB50C01D9E11B500CFFF9C /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB50BF1D9E11B500CFFF9C /* TextFieldDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		5B6ECDCC1D8F366A003C8218 /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pin+CoreDataProperties.swift"; path = "../Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5B6ECDCD1D8F366A003C8218 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pin.swift; path = ../Pin.swift; sourceTree = "<group>"; };
 		5B6ECDD01D8F37DA003C8218 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		5BEB50BF1D9E11B500CFFF9C /* TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				5B6ECDCD1D8F366A003C8218 /* Pin.swift */,
 				5B6ECDD01D8F37DA003C8218 /* CoreDataStack.swift */,
 				5B0018501D94CEBF0017CA60 /* WeatherDetailViewController.swift */,
+				5BEB50BF1D9E11B500CFFF9C /* TextFieldDelegate.swift */,
 			);
 			path = WeatherChecker;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 				5B6ECDB41D8E31D9003C8218 /* MapViewController.swift in Sources */,
 				5B6ECDB21D8E31D9003C8218 /* AppDelegate.swift in Sources */,
 				5B6ECDD11D8F37DA003C8218 /* CoreDataStack.swift in Sources */,
+				5BEB50C01D9E11B500CFFF9C /* TextFieldDelegate.swift in Sources */,
 				5B6ECDCF1D8F366A003C8218 /* Pin.swift in Sources */,
 				5B6ECDCE1D8F366A003C8218 /* Pin+CoreDataProperties.swift in Sources */,
 				5B6ECDC61D8E4CDC003C8218 /* DBClient.swift in Sources */,
