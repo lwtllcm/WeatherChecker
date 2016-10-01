@@ -27,6 +27,13 @@ class  WeatherInfoTableViewController: UITableViewController
         //https://gkbrown.org/2015/12/07/displaying-an-activity-indicator-while-loading-data-in-the-background/
        
         tableView.backgroundView = activityIndicator
+        
+        if Reachability.isConnectedToNetwork() {
+            print("Connected")
+        }
+        else {
+            print("not Connected")
+        }
 
         }
         
@@ -80,8 +87,8 @@ class  WeatherInfoTableViewController: UITableViewController
         
         DBClient.sharedInstance().getWeatherData (thisPin.latitude!, lon: thisPin.longitude!) {(results, error) in
             print("taskForGetMethod")
-            print("results from taskForGETMethod", results)
-            print("error from taskForGETMethod", error)
+           // print("results from taskForGETMethod", results)
+           // print("error from taskForGETMethod", error)
             
             if (error != nil) {
                 NSOperationQueue.mainQueue().addOperationWithBlock {

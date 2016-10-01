@@ -68,6 +68,26 @@ class DBClient {
                 
             }
             
+            /*
+            func checkForTimedOut() {
+                guard (error?.code == NSURLErrorTimedOut) else {
+                    return
+                }
+                
+                print("error")
+                sendError("Request timed out")
+                
+                return
+            }
+            */
+            
+            if Reachability.isConnectedToNetwork() != true {
+                print("notConnected")
+                sendError("Your internet is disconnected, please try again")
+            }
+            
+           // checkForTimedOut()
+
             
             if error != nil
             {
