@@ -121,6 +121,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         
         geocoder.geocodeAddressString(mapTextField.text!, completionHandler: {placemarks, error in
             
+            if Reachability.isConnectedToNetwork() != true {
+              
+                let uiAlertController = UIAlertController(title: "geocoding error", message: "Your internet is disconnected, please try again", preferredStyle: .Alert)
+                
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidden = true
+                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                uiAlertController.addAction(defaultAction)
+                self.presentViewController(uiAlertController, animated: true, completion: nil)
+            }
             
             if (error != nil) {
                 print("geocoding error")
