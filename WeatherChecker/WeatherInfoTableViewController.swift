@@ -17,10 +17,15 @@ class  WeatherInfoTableViewController: UITableViewController
     var weatherDetailsArray:NSMutableArray = []
     var weatherDetailsDictionary:NSMutableDictionary = [:]
     
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("WeatherInfoTableViewController viewDidLoad")
         
+        //https://gkbrown.org/2015/12/07/displaying-an-activity-indicator-while-loading-data-in-the-background/
+        tableView.backgroundView = activityIndicator
 
         }
         
@@ -30,6 +35,8 @@ class  WeatherInfoTableViewController: UITableViewController
    
         super.viewWillAppear(animated)
         print("WeatherInfoTableViewController viewDidLoad")
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        activityIndicator.startAnimating()
         
         let fetchedObjects = weatherInfoFetchedResultsController?.fetchedObjects
         print("fetchedObjects", fetchedObjects)
@@ -39,6 +46,11 @@ class  WeatherInfoTableViewController: UITableViewController
             
         }
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        activityIndicator.stopAnimating()
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

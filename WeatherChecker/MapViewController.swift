@@ -173,7 +173,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
                 self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
                 
                 self.addPin(self.mapTextField.text!, latitude: "\(self.latitude)", longitude: "\(self.longitude)")
-                
+                self.mapTextField.text = " "
+
 
             }
     
