@@ -25,6 +25,7 @@ class  WeatherInfoTableViewController: UITableViewController
         print("WeatherInfoTableViewController viewDidLoad")
         
         //https://gkbrown.org/2015/12/07/displaying-an-activity-indicator-while-loading-data-in-the-background/
+       
         tableView.backgroundView = activityIndicator
 
         }
@@ -51,6 +52,10 @@ class  WeatherInfoTableViewController: UITableViewController
     override func viewDidAppear(animated: Bool) {
         tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         activityIndicator.stopAnimating()
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = UIColor.clearColor()
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
