@@ -122,7 +122,19 @@ class  WeatherInfoTableViewController: UITableViewController
                 thisDictionary.setObject(results.valueForKey("weather")?.valueForKey("description"), forKey: "description")
                 thisDictionary.setObject((results.valueForKey("main")?.valueForKey("humidity"))!, forKey: "humidity")
                 thisDictionary.setObject((results.valueForKey("main")?.valueForKey("pressure"))!, forKey: "pressure")
+            
+            if let stringTemp = results.valueForKey("main")?.valueForKey("temp") {
+                print(stringTemp)
+                let numTemp = stringTemp as! Int
+                print(numTemp)
+                thisDictionary.setObject(numTemp, forKey: "temp")
+                
+            }
+            else {
                 thisDictionary.setObject((results.valueForKey("main")?.valueForKey("temp"))!, forKey: "temp")
+            }
+            
+          
                 thisDictionary.setObject((results.valueForKey("sys")?.valueForKey("sunrise"))!, forKey: "sunrise")
                 thisDictionary.setObject((results.valueForKey("sys")?.valueForKey("sunset"))!, forKey: "sunset")
                 print(self.weatherDetailsArray[indexPath.row])
