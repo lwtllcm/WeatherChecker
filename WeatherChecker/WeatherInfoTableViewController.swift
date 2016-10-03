@@ -134,9 +134,56 @@ class  WeatherInfoTableViewController: UITableViewController
                 thisDictionary.setObject((results.valueForKey("main")?.valueForKey("temp"))!, forKey: "temp")
             }
             
-          
+            
+            if let numSunrise = results.valueForKey("sys")?.valueForKey("sunrise") {
+                print(numSunrise)
+                let stringSunrise = String(numSunrise)
+                
+                print(stringSunrise)
+                let numSunrise  = Double(stringSunrise)
+                print(numSunrise)
+                let utcFormattedSunrise = NSDate(timeIntervalSince1970: numSunrise!)
+                print(utcFormattedSunrise)
+              
+                let formatter = NSDateFormatter()
+                formatter.dateFormat = "hh.mm a"
+                let formattedSunrise = formatter.stringFromDate(utcFormattedSunrise)
+                print(formattedSunrise)
+                thisDictionary.setObject(formattedSunrise, forKey: "sunrise")
+                }
+                
+            else {
                 thisDictionary.setObject((results.valueForKey("sys")?.valueForKey("sunrise"))!, forKey: "sunrise")
+
+            }
+            
+            
+            if let numSunset = results.valueForKey("sys")?.valueForKey("sunset") {
+                print(numSunset)
+                let stringSunset = String(numSunset)
+                
+                print(stringSunset)
+                let numSunset  = Double(stringSunset)
+                print(numSunset)
+                let utcFormattedSunset = NSDate(timeIntervalSince1970: numSunset!)
+                print(utcFormattedSunset)
+                
+                let formatter = NSDateFormatter()
+                formatter.dateFormat = "hh.mm a"
+                let formattedSunset = formatter.stringFromDate(utcFormattedSunset)
+                print(formattedSunset)
+                thisDictionary.setObject(formattedSunset, forKey: "sunset")
+            }
+                
+            else {
                 thisDictionary.setObject((results.valueForKey("sys")?.valueForKey("sunset"))!, forKey: "sunset")
+                
+            }
+            
+
+            
+               // thisDictionary.setObject((results.valueForKey("sys")?.valueForKey("sunrise"))!, forKey: "sunrise")
+               // thisDictionary.setObject((results.valueForKey("sys")?.valueForKey("sunset"))!, forKey: "sunset")
                 print(self.weatherDetailsArray[indexPath.row])
                 
                 dispatch_async(dispatch_get_main_queue()) {

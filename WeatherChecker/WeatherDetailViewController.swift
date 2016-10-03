@@ -49,22 +49,15 @@ class  WeatherDetailViewController: UIViewController {
         }
         
         if let convertSunrise = weatherDetailsDictionary.valueForKey("sunrise") {
-        print(convertSunrise)
-            
-        let sunriseNumber =  convertSunrise as! Double
-        let sunriseDate = NSDate(timeIntervalSince1970: sunriseNumber)
-        
-        sunriseLabel.text =  String(sunriseDate)
+            print(convertSunrise)
+            sunriseLabel.text =  String(convertSunrise)
         }
 
         
         if let convertSunset = weatherDetailsDictionary.valueForKey("sunset") {
             print(convertSunset)
             
-            let sunsetNumber =  convertSunset as! Double
-            let sunsetDate = NSDate(timeIntervalSince1970: sunsetNumber)
-            
-            sunsetLabel.text =  String(sunsetDate)
+            sunsetLabel.text =  String(convertSunset)
         }
 
         self.reloadInputViews()
