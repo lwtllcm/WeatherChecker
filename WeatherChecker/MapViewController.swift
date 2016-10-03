@@ -167,10 +167,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
                 self.mapView.addAnnotation(annotation)
                 
                 let regionRadius: CLLocationDistance = 1000
-                
-                
-                let coordinateRegion = MKCoordinateRegionMakeWithDistance(thisCoordinate, regionRadius * 2.0, regionRadius * 2.0)
-                
                 self.mapView.delegate = self
                 
                 
@@ -214,7 +210,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         
         
         self.mapView.addAnnotation(annotation)
-        
         
     }
     
@@ -263,20 +258,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         
     }
     
-    //keyboard methods
-    
     func keyboardWillShow(notification: NSNotification) {
         print("keyboardWillShow")
-       // if bottomText.isFirstResponder() {
-           // view.frame.origin.y = getKeyboardHeight(notification) * -1
-       // }
+
     }
     
     func keyboardWillHide(notification: NSNotification) {
         print("keyboardWillHide")
-       // if bottomText.isFirstResponder() {
             view.frame.origin.y = 0.0
-       // }
     }
     
     func getKeyboardHeight(notification:NSNotification) -> CGFloat {
@@ -306,18 +295,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
     
-  /*
-    //text methods
-    func textFieldDidBeginEditing( textField: UITextField) {
-        print("textFieldDidBeginEditing")
-        textField.text = ""
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        print("textFieldShouldReturn")
-        return true
-   }
- */
 
 }
 

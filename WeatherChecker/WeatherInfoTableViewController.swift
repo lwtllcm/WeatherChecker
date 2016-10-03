@@ -34,25 +34,31 @@ class  WeatherInfoTableViewController: UITableViewController
         else {
             print("not Connected")
         }
-
-        }
         
-    
-    
+        let fetchedObjects = weatherInfoFetchedResultsController?.fetchedObjects
+
+        for pin in fetchedObjects! {
+      
+            
+            let thisPin = pin as! Pin
+            print(thisPin.location)
+            let weatherDetailsDictionary = NSMutableDictionary()
+            weatherDetailsDictionary.setObject(thisPin.location!, forKey: "location")
+            weatherDetailsDictionary.setObject(thisPin.latitude!, forKey: "latitude")
+            weatherDetailsDictionary.setObject(thisPin.longitude!, forKey: "longitude")
+            weatherDetailsArray.addObject(weatherDetailsDictionary)
+
+            
+        }
+    }
+        
     override func viewWillAppear(animated: Bool) {
    
         super.viewWillAppear(animated)
         print("WeatherInfoTableViewController viewDidLoad")
+        print(weatherDetailsArray)
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         activityIndicator.startAnimating()
-        
-        let fetchedObjects = weatherInfoFetchedResultsController?.fetchedObjects
-        print("fetchedObjects", fetchedObjects)
-        
-        for pin in fetchedObjects! {
-            print(pin)
-            
-        }
         
     }
     
@@ -82,66 +88,63 @@ class  WeatherInfoTableViewController: UITableViewController
         let thisPin = fetchedObjects![indexPath.row] as! Pin
         print("thisPin",thisPin.location)
         
-        pinCell.textLabel?.text = thisPin.location
-        
-        
-        DBClient.sharedInstance().getWeatherData (thisPin.latitude!, lon: thisPin.longitude!) {(results, error) in
-            print("taskForGetMethod")
-           // print("results from taskForGETMethod", results)
-           // print("error from taskForGETMethod", error)
+        let thisDictionary = self.weatherDetailsArray[indexPath.row]
+        pinCell.textLabel?.text = thisDictionary.valueForKey("location") as! String
             
-            if (error != nil) {
-                NSOperationQueue.mainQueue().addOperationWithBlock {
+        DBClient.sharedInstance().getWeatherData (thisDictionary.valueForKey("latitude") as! String, lon: thisDictionary.valueForKey("longitude") as! String) {(results, error) in
+  
+            
+           
+        print("taskForGetMethod")
+            
+        if (error != nil) {
+            NSOperationQueue.mainQueue().addOperationWithBlock {
                     
-                    let errorMsg  = error?.localizedDescription
+                let errorMsg  = error?.localizedDescription
                     
-                    let uiAlertController = UIAlertController(title: "download error", message: errorMsg, preferredStyle: .Alert)
-                    let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                    uiAlertController.addAction(defaultAction)
-                    self.presentViewController(uiAlertController, animated: true, completion: nil)
+                let uiAlertController = UIAlertController(title: "download error", message: errorMsg, preferredStyle: .Alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                uiAlertController.addAction(defaultAction)
+                self.presentViewController(uiAlertController, animated: true, completion: nil)
                 }
             }
-            //}
+            
+            
             else {
                 
+                
                 let thisWeatherDescription = results.valueForKey("weather")?.valueForKey("description") as! NSArray
-                print(thisWeatherDescription[0])
                 
-                let weatherDetailsDictionary = NSMutableDictionary()
-                weatherDetailsDictionary.setObject(results.valueForKey("name")!, forKey: "name")
-                weatherDetailsDictionary.setObject((results.valueForKey("main")?.valueForKey("humidity"))!, forKey: "humidity")
-                weatherDetailsDictionary.setObject((results.valueForKey("main")?.valueForKey("pressure"))!, forKey: "pressure")
-                weatherDetailsDictionary.setObject((results.valueForKey("main")?.valueForKey("temp"))!, forKey: "temp")
-                weatherDetailsDictionary.setObject((results.valueForKey("sys")?.valueForKey("sunrise"))!, forKey: "sunrise")
-                weatherDetailsDictionary.setObject((results.valueForKey("sys")?.valueForKey("sunset"))!, forKey: "sunset")
+                
+                self.weatherDetailsDictionary.setObject(thisWeatherDescription[0], forKey: "description")
+                print(self.weatherDetailsDictionary.valueForKey("description"))
 
-
-                print(weatherDetailsDictionary)
-                
-                self.weatherDetailsArray.addObject(weatherDetailsDictionary)
-                print(self.weatherDetailsArray)
-                
+                thisDictionary.setObject(results.valueForKey("weather")?.valueForKey("description"), forKey: "description")
+                thisDictionary.setObject((results.valueForKey("main")?.valueForKey("humidity"))!, forKey: "humidity")
+                thisDictionary.setObject((results.valueForKey("main")?.valueForKey("pressure"))!, forKey: "pressure")
+                thisDictionary.setObject((results.valueForKey("main")?.valueForKey("temp"))!, forKey: "temp")
+                thisDictionary.setObject((results.valueForKey("sys")?.valueForKey("sunrise"))!, forKey: "sunrise")
+                thisDictionary.setObject((results.valueForKey("sys")?.valueForKey("sunset"))!, forKey: "sunset")
+                print(self.weatherDetailsArray[indexPath.row])
                 
                 dispatch_async(dispatch_get_main_queue()) {
 
-                pinCell.textLabel?.text = thisPin.location
-                pinCell.detailTextLabel?.text = (thisWeatherDescription[0] as! String)
+
+                pinCell.detailTextLabel?.text = thisWeatherDescription[0] as? String
                     
                 }
                 
             }
-            }
-        })
+        }
+    })
         
         return pinCell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("didSelectRowAtIndexPath")
-        print(weatherDetailsArray)
-        print(weatherDetailsArray[indexPath.row])
         
-        weatherDetailsDictionary = weatherDetailsArray[indexPath.row] as! NSMutableDictionary
+        let weatherDetailsDictionary = weatherDetailsArray[indexPath.row] as! NSMutableDictionary
         print(weatherDetailsDictionary)
         
         let weatherDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("WeatherDetailViewController") as! WeatherDetailViewController

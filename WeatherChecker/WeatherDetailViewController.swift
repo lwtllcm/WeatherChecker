@@ -31,7 +31,7 @@ class  WeatherDetailViewController: UIViewController {
         
         print(weatherDetailsDictionary)
         
-        detailViewTitle.text = weatherDetailsDictionary.valueForKey("name") as? String
+        detailViewTitle.text = weatherDetailsDictionary.valueForKey("location") as? String
         
         if let convertTemp = weatherDetailsDictionary.valueForKey("temp") {
         print(convertTemp)

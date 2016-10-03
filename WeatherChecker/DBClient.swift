@@ -31,8 +31,6 @@ class DBClient {
         components.host = "api.openweathermap.org"
         components.path = "/data/2.5/weather"
         components.queryItems = [NSURLQueryItem]()
-        //let queryItem1 = NSURLQueryItem(name:"lat", value:"35")
-        //let queryItem2 = NSURLQueryItem(name:"lon", value:"139")
         
         let queryItem1 = NSURLQueryItem(name:"lat", value:lat)
         let queryItem2 = NSURLQueryItem(name:"lon", value:lon)
@@ -68,26 +66,11 @@ class DBClient {
                 
             }
             
-            /*
-            func checkForTimedOut() {
-                guard (error?.code == NSURLErrorTimedOut) else {
-                    return
-                }
-                
-                print("error")
-                sendError("Request timed out")
-                
-                return
-            }
-            */
-            
             if Reachability.isConnectedToNetwork() != true {
                 print("notConnected")
                 sendError("Your internet is disconnected, please try again")
             }
             
-           // checkForTimedOut()
-
             
             if error != nil
             {
