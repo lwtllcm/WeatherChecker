@@ -31,40 +31,40 @@ class  WeatherDetailViewController: UIViewController {
         
         print(weatherDetailsDictionary)
         
-        detailViewTitle.text = weatherDetailsDictionary.valueForKey("location") as? String
+        detailViewTitle.text = weatherDetailsDictionary.value(forKey: "location") as? String
         
-        if let convertTemp = weatherDetailsDictionary.valueForKey("temp") {
+        if let convertTemp = weatherDetailsDictionary.value(forKey: "temp") {
         print(convertTemp)
-        tempLabel.text =  String(convertTemp)
+        tempLabel.text =  String(describing: convertTemp)
         }
         
-        if let convertHumidity =  weatherDetailsDictionary.valueForKey("humidity") {
+        if let convertHumidity =  weatherDetailsDictionary.value(forKey: "humidity") {
         print(convertHumidity)
-        humidityLabel.text =  String(convertHumidity)
+        humidityLabel.text =  String(describing: convertHumidity)
         }
         
-        if let convertPressure = weatherDetailsDictionary.valueForKey("pressure") {
+        if let convertPressure = weatherDetailsDictionary.value(forKey: "pressure") {
         print(convertPressure)
-        pressureLabel.text =  String(convertPressure)
+        pressureLabel.text =  String(describing: convertPressure)
         }
         
-        if let convertSunrise = weatherDetailsDictionary.valueForKey("sunrise") {
+        if let convertSunrise = weatherDetailsDictionary.value(forKey: "sunrise") {
             print(convertSunrise)
-            sunriseLabel.text =  String(convertSunrise)
+            sunriseLabel.text =  String(describing: convertSunrise)
         }
 
         
-        if let convertSunset = weatherDetailsDictionary.valueForKey("sunset") {
+        if let convertSunset = weatherDetailsDictionary.value(forKey: "sunset") {
             print(convertSunset)
             
-            sunsetLabel.text =  String(convertSunset)
+            sunsetLabel.text =  String(describing: convertSunset)
         }
 
         self.reloadInputViews()
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("WeatherDetailViewController viewWillAppear")
         

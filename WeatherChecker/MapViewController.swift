@@ -25,7 +25,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
     var latitude: CLLocationDegrees = 0.0
     var longitude: CLLocationDegrees = 0.0
 
-    var fetchedResultsController:NSFetchedResultsController? {
+   // var fetchedResultsController:NSFetchedResultsController<AnyObject>? {
+    var fetchedResultsController:NSFetchedResultsController<Pin>? {
         didSet {
             executeSearch()
         }
@@ -48,13 +49,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        self.activityIndicator.hidden = true
+        self.activityIndicator.isHidden = true
 
         
-        let fr = NSFetchRequest(entityName: "Pin")
+        //let fr = NSFetchRequest(entityName: "Pin")
+        
+        //let fr = Pin.fetchRequest() as! NSFetchRequest<Pin>
+        
+        let fr:NSFetchRequest<Pin> = Pin.fetchRequest()  as! NSFetchRequest<Pin>
         fr.sortDescriptors = [NSSortDescriptor(key: "location", ascending:  true)]
         
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let delegate = UIApplication.shared.delegate as! AppDelegate
         let stack = delegate.stack
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
@@ -65,8 +70,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         }
         else {
             for pin in (fetchedResultsController?.fetchedObjects)! {
+                print("fetchedObjects")
                 print(pin)
-                self.setAnnotations(pin as! Pin)
+                self.setAnnotations(pin: pin )
                 self.mapView.reloadInputViews()
                 
             }
@@ -76,12 +82,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
     
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         mapTextField.text = " "
 
-        setTextFields(mapTextField)
+        setTextFields(textField: mapTextField)
         
         subscribeToKeyboardNotifications()
         subscribeToKeyboardWillHideNotifications()
@@ -89,7 +95,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         print("viewWillDisappear")
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
@@ -98,7 +104,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
     func setTextFields(textField:UITextField) {
         print("setTextFields")
         
-        textField.textAlignment = NSTextAlignment.Center
+        textField.textAlignment = NSTextAlignment.center
         textField.adjustsFontSizeToFitWidth = true
         textField.delegate = textFieldDelegate
     }
@@ -107,14 +113,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func addPinButtonPressed(sender: AnyObject) {
+    @IBAction func addPinButtonPressed(_ sender: AnyObject) {
  
         print("addPin button pressed")
         print(mapTextField.text)
         
         let geocoder = CLGeocoder()
         
-        self.activityIndicator.hidden = false
+        self.activityIndicator.isHidden = false
 
         self.activityIndicator.startAnimating()
         
@@ -123,30 +129,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
             
             if Reachability.isConnectedToNetwork() != true {
               
-                let uiAlertController = UIAlertController(title: "geocoding error", message: "Your internet is disconnected, please try again", preferredStyle: .Alert)
+                let uiAlertController = UIAlertController(title: "geocoding error", message: "Your internet is disconnected, please try again", preferredStyle: .alert)
                 
                 self.activityIndicator.stopAnimating()
-                self.activityIndicator.hidden = true
-                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                self.activityIndicator.isHidden = true
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 uiAlertController.addAction(defaultAction)
-                self.presentViewController(uiAlertController, animated: true, completion: nil)
+                self.present(uiAlertController, animated: true, completion: nil)
             }
             
             if (error != nil) {
                 print("geocoding error")
                 print(error?.localizedDescription)
                 let errorMsg  = error?.localizedDescription
-                let uiAlertController = UIAlertController(title: "geocoding error", message: errorMsg, preferredStyle: .Alert)
+                let uiAlertController = UIAlertController(title: "geocoding error", message: errorMsg, preferredStyle: .alert)
                 
                 
-                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 uiAlertController.addAction(defaultAction)
-                self.presentViewController(uiAlertController, animated: true, completion: nil)
+                self.present(uiAlertController, animated: true, completion: nil)
                 
             }
             else {
                 self.activityIndicator.stopAnimating()
-                self.activityIndicator.hidden = true
+                self.activityIndicator.isHidden = true
 
 
                 let thisPlacemark = placemarks![0]
@@ -166,19 +172,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
                 
                 self.mapView.addAnnotation(annotation)
                 
-                let regionRadius: CLLocationDistance = 1000
+                let regionRadius = 1000 as CLLocationDistance
                 self.mapView.delegate = self
                 
-                
-                let fr = NSFetchRequest(entityName: "Pin")
+                                //let fr = NSFetchRequest(entityName: "Pin")
+                let fr = Pin.fetchRequest() as! NSFetchRequest<Pin>
+
                 fr.sortDescriptors = [NSSortDescriptor(key: "location", ascending:  true)]
                 
-                let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let delegate = UIApplication.shared.delegate as! AppDelegate
                 let stack = delegate.stack
                 
                 self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
                 
-                self.addPin(self.mapTextField.text!, latitude: "\(self.latitude)", longitude: "\(self.longitude)")
+                self.addPin(location: self.mapTextField.text!, latitude: "\(self.latitude)", longitude: "\(self.longitude)")
                 self.mapTextField.text = " "
 
 
@@ -188,7 +195,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
     }
     
 
-    @IBAction func weatherInfoButtonPressed(sender: AnyObject) {
+    @IBAction func weatherInfoButtonPressed(_ sender: AnyObject) {
         print("WeatherInfo button pressed")
         
     }
@@ -220,7 +227,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         
         do {
             
-            let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let delegate = UIApplication.shared.delegate as! AppDelegate
             let stack = delegate.stack
             
             try stack.save()
@@ -230,17 +237,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
     }
 
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue,sender: Any?) {
         print("prepareForSegue")
         
+    
+        
         if segue.identifier == "showWeatherInfo" {
-            if let weatherInfoTableViewController = segue.destinationViewController as? WeatherInfoTableViewController {
+            if let weatherInfoTableViewController = segue.destination as? WeatherInfoTableViewController {
                 
                 
-                let fr = NSFetchRequest(entityName: "Pin")
+               // let fr = NSFetchRequest(entityName: "Pin")
+                let fr = Pin.fetchRequest() as! NSFetchRequest<Pin>
+
                 fr.sortDescriptors = [NSSortDescriptor(key: "latitude", ascending:  true), NSSortDescriptor(key: "longitude", ascending:  true)]
                 
-                let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let delegate = UIApplication.shared.delegate as! AppDelegate
                 let stack = delegate.stack
                 
              
@@ -258,41 +269,41 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(_ notification: NSNotification) {
         print("keyboardWillShow")
 
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: NSNotification) {
         print("keyboardWillHide")
             view.frame.origin.y = 0.0
     }
     
-    func getKeyboardHeight(notification:NSNotification) -> CGFloat {
+    func getKeyboardHeight(_ notification:NSNotification) -> CGFloat {
         print("getKeyboardHeight")
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-        return keyboardSize.CGRectValue().height
+        return keyboardSize.cgRectValue.height
     }
     
     func subscribeToKeyboardNotifications() {
         print("subscribeToKeyboardNotifications")
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillShow:")), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     func subscribeToKeyboardWillHideNotifications() {
         print("subscribeToKeyboardNotifications")
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillHide:")), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     func unsubscribeFromKeyboardNotifications() {
         print("unsubscribeFromKeyboardNotifications")
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     func unsubscribeFromKeyboardWillHideNotifications() {
         print("unsubscribeFromKeyboardNotifications")
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
 

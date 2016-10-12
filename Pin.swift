@@ -14,8 +14,8 @@ class Pin: NSManagedObject {
 
     convenience init(location: String, latitude: String, longitude: String, context: NSManagedObjectContext) {
         
-        if let pin = NSEntityDescription.entityForName("Pin", inManagedObjectContext: context) {
-            self.init(entity:pin, insertIntoManagedObjectContext: context)
+        if let pin = NSEntityDescription.entity(forEntityName: "Pin", in: context) {
+            self.init(entity:pin, insertInto: context)
             self.location = location
             self.latitude = latitude
             self.longitude = longitude
