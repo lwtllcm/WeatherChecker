@@ -15,28 +15,28 @@ class  TextFieldDelegate: NSObject, UITextFieldDelegate {
         super.init()
     }
     
-    func textFieldDidBeginEditing( textField: UITextField) {
+    func textFieldDidBeginEditing( _ textField: UITextField) {
         print("textFieldDidBeginEditing")
         if textField.text == "TOP" || textField.text == "BOTTOM" {
             textField.text = ""
         }
     }
     
-    func textFieldShouldClear(textField: UITextField) -> Bool {
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
         print("textFieldShouldClear")
         return true
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         print("shouldChangeCharactersInRange")
         return true
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         print("textFieldDidEndEditing")
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("textFieldShouldReturn")
         textField.resignFirstResponder()
         return true

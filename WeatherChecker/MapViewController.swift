@@ -172,7 +172,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
                 
                 self.mapView.addAnnotation(annotation)
                 
-                let regionRadius = 1000 as CLLocationDistance
+                _ = 1000 as CLLocationDistance
                 self.mapView.delegate = self
                 
                                 //let fr = NSFetchRequest(entityName: "Pin")
@@ -288,12 +288,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
     
     func subscribeToKeyboardNotifications() {
         print("subscribeToKeyboardNotifications")
-        NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillShow:")), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     func subscribeToKeyboardWillHideNotifications() {
         print("subscribeToKeyboardNotifications")
-        NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillHide:")), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     func unsubscribeFromKeyboardNotifications() {

@@ -40,7 +40,7 @@ class  WeatherInfoTableViewController: UITableViewController
         for pin in fetchedObjects {
       
             
-            let thisPin = pin as! Pin
+            let thisPin = pin 
             print(thisPin.location)
             let weatherDetailsDictionary = NSMutableDictionary()
             weatherDetailsDictionary.setObject(thisPin.location!, forKey: "location" as NSCopying)
