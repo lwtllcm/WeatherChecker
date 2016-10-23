@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     var sharedSession = URLSession.shared
-    
+   /*
     func preloadData() {
         do {
             try stack.dropAllData(coord: stack.coordinator, dbURL: stack.dbURL)
@@ -26,12 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
     }
+*/
 
-
-    private func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
-        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-        print(paths[0])
+    private func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        print("didFinishLaunching")
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        print("directory path", paths[0])
         
         stack.autoSave(delayInSeconds: 20)
 
@@ -40,11 +41,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-
+        do {
+            try stack.saveContext()
+        }catch{
+            print("error while saving")
+        }
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-
+        do {
+            try stack.saveContext()
+        }catch{
+            print("error while saving")
+        }
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -52,6 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        print("directory path", paths[0])
 
     }
 

@@ -25,7 +25,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
     var latitude: CLLocationDegrees = 0.0
     var longitude: CLLocationDegrees = 0.0
 
-   // var fetchedResultsController:NSFetchedResultsController<AnyObject>? {
     var fetchedResultsController:NSFetchedResultsController<Pin>? {
         didSet {
             executeSearch()
@@ -47,14 +46,27 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
 
     
     override func viewDidLoad() {
+        print("viewDidLoad")
         super.viewDidLoad()
         mapView.delegate = self
         self.activityIndicator.isHidden = true
 
         
-        //let fr = NSFetchRequest(entityName: "Pin")
+     }
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        //let fr = Pin.fetchRequest() as! NSFetchRequest<Pin>
+        mapTextField.text = " "
+
+        setTextFields(textField: mapTextField)
+        
+        subscribeToKeyboardNotifications()
+        subscribeToKeyboardWillHideNotifications()
+        
+        self.mapView.removeAnnotations(mapView.annotations)
         
         let fr:NSFetchRequest<Pin> = Pin.fetchRequest()  as! NSFetchRequest<Pin>
         fr.sortDescriptors = [NSSortDescriptor(key: "location", ascending:  true)]
@@ -72,25 +84,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
             for pin in (fetchedResultsController?.fetchedObjects)! {
                 print("fetchedObjects")
                 print(pin)
-                self.setAnnotations(pin: pin )
+                //self.setAnnotations(pin: pin )
                 self.mapView.reloadInputViews()
+                self.setAnnotations(pin: pin )
+                
                 
             }
         }
 
-    }
-    
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        mapTextField.text = " "
-
-        setTextFields(textField: mapTextField)
-        
-        subscribeToKeyboardNotifications()
-        subscribeToKeyboardWillHideNotifications()
 
         
     }
@@ -246,7 +247,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
             if let weatherInfoTableViewController = segue.destination as? WeatherInfoTableViewController {
                 
                 
-               // let fr = NSFetchRequest(entityName: "Pin")
                 let fr = Pin.fetchRequest() as! NSFetchRequest<Pin>
 
                 fr.sortDescriptors = [NSSortDescriptor(key: "latitude", ascending:  true), NSSortDescriptor(key: "longitude", ascending:  true)]

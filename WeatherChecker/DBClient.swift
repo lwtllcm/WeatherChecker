@@ -51,13 +51,13 @@ class DBClient {
         
         let task = session.dataTask(with: request as URLRequest) {(data, response, error) in
             
-            
+            /*
             print("data",data)
             print(" ")
             print("response", response)
             print("error", error)
             print("data task completed")
-            
+            */
             
             func sendError(error: String) {
                 
