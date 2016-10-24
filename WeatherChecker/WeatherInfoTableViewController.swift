@@ -324,6 +324,9 @@ class  WeatherInfoTableViewController: UITableViewController
                 fetchedObjects = (fetchedResultsController?.fetchedObjects)!
                 
                 print(fetchedObjects.count)
+                weatherDetailsArray.removeObject(at: indexPath.row)
+                
+            
                 self.tableView.reloadData()
                 self.tableView.reloadInputViews()
             }catch{
