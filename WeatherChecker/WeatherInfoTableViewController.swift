@@ -278,7 +278,7 @@ class  WeatherInfoTableViewController: UITableViewController
         
         print("didSelectRowAtIndexPath")
         
-        let weatherDetailsDictionary = weatherDetailsArray[indexPath.row] as! NSMutableDictionary
+        //let weatherDetailsDictionary = weatherDetailsArray[indexPath.row] as! NSMutableDictionary
         
         let weatherDetailViewController = storyboard?.instantiateViewController(withIdentifier: "WeatherDetailViewController") as! WeatherDetailViewController
         weatherDetailViewController.weatherDetailsDictionary = weatherDetailsArray[indexPath.row] as! NSMutableDictionary
@@ -297,7 +297,7 @@ class  WeatherInfoTableViewController: UITableViewController
             
             print("ready to delete")
             
-           
+           tableView.allowsSelection = false
             fetchedObjects = (weatherInfoFetchedResultsController?.fetchedObjects)!
             
             let thisFetchedObject = fetchedObjects[indexPath.row]
@@ -321,19 +321,23 @@ class  WeatherInfoTableViewController: UITableViewController
                 
                 
                 fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+                
                 fetchedObjects = (fetchedResultsController?.fetchedObjects)!
                 
+                weatherInfoFetchedResultsController = fetchedResultsController
+
                 print(fetchedObjects.count)
                 weatherDetailsArray.removeObject(at: indexPath.row)
                 
             
                 self.tableView.reloadData()
                 self.tableView.reloadInputViews()
+                tableView.allowsSelection = true
             }catch{
                 print("error while saving")
             }
         
-            self.tableView.reloadData()
+            //self.tableView.reloadData()
             
 
             
