@@ -203,7 +203,7 @@ class  WeatherInfoTableViewController: UITableViewController
                     
                     if let stringTemp = thisWeatherMainDictionary?["temp"] {
                         let numTemp = stringTemp as! Int
-                        print(numTemp)
+                        thisDictionary.setObject(numTemp, forKey: "temp" as NSCopying)
                         
                     }
                     else {
