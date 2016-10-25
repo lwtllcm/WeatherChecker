@@ -17,9 +17,6 @@ class  TextFieldDelegate: NSObject, UITextFieldDelegate {
     
     func textFieldDidBeginEditing( _ textField: UITextField) {
         print("textFieldDidBeginEditing")
-        if textField.text == "TOP" || textField.text == "BOTTOM" {
-            textField.text = ""
-        }
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {

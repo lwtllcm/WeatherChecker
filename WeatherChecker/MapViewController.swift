@@ -154,6 +154,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
             else {
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
+                self.mapTextField.resignFirstResponder()
+            
 
 
                 let thisPlacemark = placemarks![0]
