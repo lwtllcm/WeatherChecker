@@ -81,7 +81,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
             
         }
         else {
+            
             for pin in (fetchedResultsController?.fetchedObjects)! {
+                
                 print("fetchedObjects")
                 print(pin)
                 //self.setAnnotations(pin: pin )
@@ -218,6 +220,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         
         annotation.coordinate = coordinate1
         
+        annotation.title = pin.location
+      
         
         self.mapView.addAnnotation(annotation)
         
@@ -307,7 +311,40 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         print("unsubscribeFromKeyboardNotifications")
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
+ 
     
-
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView?.canShowCallout = true
+            pinView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            pinView?.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
+    
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            
+            
+            let url = NSURL(string: ((view.annotation?.subtitle)!)!)!
+            UIApplication.shared.openURL(url as URL)
+            
+            
+        }
+    }
+    
+    
 }
 
