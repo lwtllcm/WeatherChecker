@@ -119,7 +119,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
     @IBAction func addPinButtonPressed(_ sender: AnyObject) {
  
         print("addPin button pressed")
-        print(mapTextField.text)
+        print(mapTextField.text!)
         
         let geocoder = CLGeocoder()
         
@@ -143,7 +143,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
             
             if (error != nil) {
                 print("geocoding error")
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
                 let errorMsg  = error?.localizedDescription
                 let uiAlertController = UIAlertController(title: "geocoding error", message: errorMsg, preferredStyle: .alert)
                 
@@ -162,7 +162,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
 
                 let thisPlacemark = placemarks![0]
                 print(thisPlacemark)
-                print(thisPlacemark.location)
+                print(thisPlacemark.location as Any)
                 let thisCoordinate:CLLocationCoordinate2D = (thisPlacemark.location?.coordinate)!
                 
                 self.latitude = thisCoordinate.latitude
@@ -210,9 +210,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
         print("setAnnotations")
         
         let lat1 = CLLocationDegrees(pin.latitude!)
-        print(lat1)
+        print(lat1 as Any)
         let long1 = CLLocationDegrees(pin.longitude!)
-        print(long1)
+        print(long1 as Any)
         let coordinate1 = CLLocationCoordinate2D(latitude: lat1!, longitude: long1!)
         print(coordinate1)
   
@@ -264,7 +264,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
              fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
                 
                 
-             print("testFetchedResultsController.fetchedObjects in prepareForSegue", fetchedResultsController!.fetchedObjects)
+                print("testFetchedResultsController.fetchedObjects in prepareForSegue", fetchedResultsController!.fetchedObjects as Any)
                 
              weatherInfoTableViewController.weatherInfoFetchedResultsController = fetchedResultsController
                
@@ -314,7 +314,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextViewDelegate
  
     
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         let reuseId = "pin"
         

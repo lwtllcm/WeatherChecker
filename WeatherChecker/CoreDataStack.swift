@@ -261,7 +261,7 @@ extension CoreDataStack {
             print("autosaving")
             save()
             
-            let delayInNanoSeconds = UInt64(delayInSeconds) * NSEC_PER_SEC
+            _ = UInt64(delayInSeconds) * NSEC_PER_SEC
             //let time = DispatchTime.now(dispatch_time_t(DISPATCH_TIME_NOW), Int64(delayInNanoSeconds))
             let time = DispatchTime.now()
 

@@ -133,7 +133,7 @@ class  WeatherInfoTableViewController: UITableViewController
             
             
             self.fetchedObjects = (self.weatherInfoFetchedResultsController?.fetchedObjects)!
-            let thisPin = self.fetchedObjects[indexPath.row]
+            _ = self.fetchedObjects[indexPath.row]
             
             let thisDictionary = self.weatherDetailsArray[indexPath.row] as! NSMutableDictionary
             pinCell.textLabel?.text = thisDictionary.value(forKey: "location") as? String
@@ -202,18 +202,19 @@ class  WeatherInfoTableViewController: UITableViewController
                     
                     
                     if let stringTemp = thisWeatherMainDictionary?["temp"] {
-                        let numTemp = stringTemp as! Int
+       //                 let numTemp = stringTemp as! Int
+                        let numTemp = stringTemp 
                         thisDictionary.setObject(numTemp, forKey: "temp" as NSCopying)
                         
                     }
                     else {
-                        thisDictionary.setObject(thisWeatherMainDictionary?["temp"], forKey: "temp" as NSCopying)
+                        thisDictionary.setObject(thisWeatherMainDictionary?["temp"] as Any, forKey: "temp" as NSCopying)
                     }
 
                     let thisWeatherSys = results?.value(forKey: "sys") as AnyObject
                     
                     let thisWeatherSysDictionary = thisWeatherSys as? [String:AnyObject]
-                    print("thisWeatherSysDictionary", thisWeatherSysDictionary)
+                    print("thisWeatherSysDictionary", thisWeatherSysDictionary as Any)
                     
                     if let numSunrise = thisWeatherSysDictionary?["sunrise"] {
 
@@ -231,7 +232,7 @@ class  WeatherInfoTableViewController: UITableViewController
                     }
                         
                     else {
-                        thisDictionary.setObject(thisWeatherSysDictionary?["sunrise"], forKey: "sunrise" as NSCopying)
+                        thisDictionary.setObject(thisWeatherSysDictionary?["sunrise"] as Any, forKey: "sunrise" as NSCopying)
                         
                     }
                     
@@ -250,7 +251,7 @@ class  WeatherInfoTableViewController: UITableViewController
                     }
                         
                     else {
-                        thisDictionary.setObject(thisWeatherSysDictionary?["sunset"], forKey: "sunset" as NSCopying)
+                        thisDictionary.setObject(thisWeatherSysDictionary?["sunset"] as Any, forKey: "sunset" as NSCopying)
                         
                     }
 
